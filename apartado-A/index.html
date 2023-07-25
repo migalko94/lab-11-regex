@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="stylesheet" href="./src/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lector IBAN</title>
+  </head>
+  <body>
+    <div id="enunciado">
+      <h3>Introduzca el IBAN</h3>
+      <div class="busqueda" id="buscador">
+        <label for="barra-busqueda"></label>
+        <input type="text" required id="barra-busqueda" />
+        <form id="boton-busqueda">Buscar</form>
+      </div>
+      <div id="respuesta"></div>
+    </div>
+    <script type="module" src="/src/ui.ts"></script>
+  </body>
+</html>
