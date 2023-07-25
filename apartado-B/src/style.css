@@ -95,3 +95,60 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+#enunciado {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+#respuesta {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+
+#buscador {
+  display: flex;
+  flex-direction: column;
+}
+
+#boton-extraccion {
+  padding: 0.5rem 1.5rem;
+  background-color: whitesmoke;
+  cursor: pointer;
+  display: inline;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  margin: 0.5rem;
+}
+
+#boton-extraccion:hover {
+  background-color: aliceblue;
+}
+.muestra-img {
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-row: auto;
+  display: grid;
+  width: auto;
+  height: auto;
+  padding: 0.5rem;
+}
+
+.muestra-img img {
+  width: 100px;
+  height: 100px;
+}
+.muestra-enlaces {
+  font-size: 10px;
+  text-align: left;
+  padding: 0.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+}
