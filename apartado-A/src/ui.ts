@@ -1,4 +1,3 @@
-import { BOTON_BUSQUEDA, CAMPO_TEXTO, RESPUESTA_IBAN } from "./constantes";
 import {
   asignaBanco,
   esValidoIBAN,
@@ -9,13 +8,17 @@ import {
   extraeNumeroCuenta,
 } from "./validaciones";
 
+const RESPUESTA_IBAN = document.getElementById("respuesta");
+const BOTON_BUSQUEDA = document.getElementById("boton-busqueda");
+const CAMPO_TEXTO = document.getElementById("barra-busqueda");
+
 const muestraEsBienFormado = (valor: string) =>
   estaBienFormadoIBAN(valor)
     ? "El IBAN está bien formado"
-    : `El IBAN no está bien formado`;
+    : "El IBAN no está bien formado";
 
 const muestraEsValido = (valor: string) =>
-  esValidoIBAN(valor) ? "El IBAN es válido" : `El IBAN no es válido`;
+  esValidoIBAN(valor) ? "El IBAN es válido" : "El IBAN no es válido";
 
 const crearElementoParrafo = (texto: string): HTMLParagraphElement => {
   const parrafo = document.createElement("p");
@@ -36,33 +39,31 @@ const creaContenedorValidacion = (valor: string): HTMLDivElement => {
 const creaContenedorExtraccion = (valor: string): HTMLDivElement => {
   const elementosIBAN = document.createElement("div");
   elementosIBAN.classList.add("iban-div");
-  if (esValidoIBAN(valor)) {
-    elementosIBAN.append(
-      crearElementoParrafo(`Banco: ${asignaBanco(extraeCodigoBanco(valor))}`),
-      crearElementoParrafo(`Código sucursal: ${extraeCodigoSucursal(valor)}`),
-      crearElementoParrafo(`Dígito de control: ${extraeDigitoControl(valor)}`),
-      crearElementoParrafo(`Número de cuenta: ${extraeNumeroCuenta(valor)}`)
-    );
-  }
+
+  elementosIBAN.append(
+    crearElementoParrafo(`Banco: ${asignaBanco(extraeCodigoBanco(valor))}`),
+    crearElementoParrafo(`Código sucursal: ${extraeCodigoSucursal(valor)}`),
+    crearElementoParrafo(`Dígito de control: ${extraeDigitoControl(valor)}`),
+    crearElementoParrafo(`Número de cuenta: ${extraeNumeroCuenta(valor)}`)
+  );
+
   return elementosIBAN;
 };
 
-const limpiaDivRespuesta = () =>
-  RESPUESTA_IBAN && RESPUESTA_IBAN instanceof HTMLDivElement
-    ? (RESPUESTA_IBAN.innerHTML = "")
-    : () => {
-        throw new Error("No se ha encontrado el div respuesta");
-      };
+const limpiaDivRespuesta = () => {
+  if (RESPUESTA_IBAN && RESPUESTA_IBAN instanceof HTMLDivElement) {
+    RESPUESTA_IBAN.innerHTML = "";
+  }
+};
 
-const pintaRespuesta = (valor: string) =>
-  RESPUESTA_IBAN && RESPUESTA_IBAN instanceof HTMLDivElement
-    ? RESPUESTA_IBAN.append(
-        creaContenedorValidacion(valor),
-        creaContenedorExtraccion(valor)
-      )
-    : () => {
-        throw new Error("No se ha encontrado el div respuesta");
-      };
+const pintaRespuesta = (valor: string) => {
+  if (RESPUESTA_IBAN && RESPUESTA_IBAN instanceof HTMLDivElement) {
+    RESPUESTA_IBAN.appendChild(creaContenedorValidacion(valor));
+    if (esValidoIBAN(valor)) {
+      RESPUESTA_IBAN.appendChild(creaContenedorExtraccion(valor));
+    }
+  }
+};
 
 if (BOTON_BUSQUEDA && BOTON_BUSQUEDA instanceof HTMLElement) {
   BOTON_BUSQUEDA.addEventListener("click", () => {

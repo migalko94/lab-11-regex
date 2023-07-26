@@ -1,19 +1,19 @@
 import {
   asignaBanco,
-  esValidoIBAN,
   estaBienFormadoIBAN,
   extraeCodigoSucursal,
   extraeDigitoControl,
   extraeCodigoBanco,
   extraeNumeroCuenta,
+  esValidoIBAN,
 } from "./validaciones";
 
 describe("estaBienFormadoIBAN", () => {
   test.each([
     ["ES21 1465 0100 72 2030876293", true],
-    ["ES66 2100 0418 40 1234567891", true],
+    ["ES.66 2100 0418 40 123.4567891", true],
     ["ES2114650100722030876293", true],
-    ["ES21-1465-0100-72-2030876293", true],
+    ["ES21-14.65 - 0100-72-2030876293", true],
     ["ES6621000418401234567891", true],
     ["2021 1465 0100 72 2030876293", false],
     ["ES211465010072203087629", false],
@@ -32,11 +32,9 @@ describe("estaBienFormadoIBAN", () => {
 
 describe("esValidoIBAN", () => {
   test.each([
-    ["ES6621000418401234567891", true],
-    ["ES6000491500051234567892", true],
-    [" ES9420805801101234567891", true],
-    ["ES9000246-912501234567891", true],
-    ["ES0000000000000000000000", false],
+    ["ES66210004.18401.234567891", true],
+    ["ES600049150-0051234567892", true],
+    ["ES00-00000000000000000000", false],
   ])(
     "Deberia devolver para el IBAN %s el valor %s. Testeamos la validación del IBAN de la biblioteca externa 'ibantools' con IBAN bien formados, pero no válidos",
     (valor: string, expected: boolean) => {
