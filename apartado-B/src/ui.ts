@@ -33,22 +33,20 @@ const creaContenedorEnlaces = (texto: string): HTMLDivElement => {
   return divMuestra;
 };
 
-const limpiaDivRespuesta = () =>
-  RESPUESTA_IMG && RESPUESTA_IMG instanceof HTMLDivElement
-    ? (RESPUESTA_IMG.innerHTML = "")
-    : () => {
-        throw new Error("No se ha encontrado el div respuesta");
-      };
+const limpiaDivRespuesta = () => {
+  if (RESPUESTA_IMG && RESPUESTA_IMG instanceof HTMLDivElement) {
+    RESPUESTA_IMG.innerHTML = "";
+  }
+};
 
-const pintaRespuesta = (texto: string) =>
-  RESPUESTA_IMG && RESPUESTA_IMG instanceof HTMLDivElement
-    ? RESPUESTA_IMG.append(
-        creaContenedorImagenes(texto),
-        creaContenedorEnlaces(texto)
-      )
-    : () => {
-        throw new Error("No se ha encontrado el div respuesta");
-      };
+const pintaRespuesta = (texto: string) => {
+  if (RESPUESTA_IMG && RESPUESTA_IMG instanceof HTMLDivElement) {
+    RESPUESTA_IMG.append(
+      creaContenedorImagenes(texto),
+      creaContenedorEnlaces(texto)
+    );
+  }
+};
 
 if (BOTON_EXTRACCION && BOTON_EXTRACCION instanceof HTMLElement) {
   BOTON_EXTRACCION.addEventListener("click", () => {
