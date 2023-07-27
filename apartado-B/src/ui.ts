@@ -48,11 +48,15 @@ const pintaRespuesta = (texto: string) => {
   }
 };
 
-if (BOTON_EXTRACCION && BOTON_EXTRACCION instanceof HTMLElement) {
-  BOTON_EXTRACCION.addEventListener("click", () => {
-    if (CAMPO_TEXTO && CAMPO_TEXTO instanceof HTMLTextAreaElement) {
-      limpiaDivRespuesta();
-      pintaRespuesta(CAMPO_TEXTO.value);
-    }
-  });
-}
+const manejaExtraccion = () => {
+  if (BOTON_EXTRACCION && BOTON_EXTRACCION instanceof HTMLElement) {
+    BOTON_EXTRACCION.addEventListener("click", () => {
+      if (CAMPO_TEXTO && CAMPO_TEXTO instanceof HTMLTextAreaElement) {
+        limpiaDivRespuesta();
+        pintaRespuesta(CAMPO_TEXTO.value);
+      }
+    });
+  }
+};
+
+document.addEventListener("DOMContentLoaded", () => manejaExtraccion());

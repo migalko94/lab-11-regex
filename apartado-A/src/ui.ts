@@ -65,11 +65,15 @@ const pintaRespuesta = (valor: string) => {
   }
 };
 
-if (BOTON_BUSQUEDA && BOTON_BUSQUEDA instanceof HTMLElement) {
-  BOTON_BUSQUEDA.addEventListener("click", () => {
-    if (CAMPO_TEXTO && CAMPO_TEXTO instanceof HTMLInputElement) {
-      limpiaDivRespuesta();
-      pintaRespuesta(CAMPO_TEXTO.value);
-    }
-  });
-}
+const manejaBusqueda = () => {
+  if (BOTON_BUSQUEDA && BOTON_BUSQUEDA instanceof HTMLElement) {
+    BOTON_BUSQUEDA.addEventListener("click", () => {
+      if (CAMPO_TEXTO && CAMPO_TEXTO instanceof HTMLInputElement) {
+        limpiaDivRespuesta();
+        pintaRespuesta(CAMPO_TEXTO.value);
+      }
+    });
+  }
+};
+
+document.addEventListener("DOMContentLoaded", () => manejaBusqueda());
